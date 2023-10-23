@@ -271,6 +271,8 @@ class SubscriptionsInfo {
 }
 
 class TelephonyInfo {
+  final int dataActivity;
+
   final String networkCountryIso;
   final String mobileCountryCode;
 
@@ -305,6 +307,7 @@ class TelephonyInfo {
 
   final String networkOperatorName;
   TelephonyInfo({
+    required this.dataActivity,
     required this.networkCountryIso,
     required this.mobileCountryCode,
     required this.mobileNetworkCode,
@@ -321,6 +324,7 @@ class TelephonyInfo {
   });
 
   TelephonyInfo copyWith({
+    int? dataActivity,
     String? networkCountryIso,
     String? mobileCountryCode,
     String? mobileNetworkCode,
@@ -337,6 +341,7 @@ class TelephonyInfo {
     String? networkOperatorName,
   }) {
     return TelephonyInfo(
+      dataActivity: dataActivity ?? this.dataActivity,
       networkCountryIso: networkCountryIso ?? this.networkCountryIso,
       mobileCountryCode: mobileCountryCode ?? this.mobileCountryCode,
       mobileNetworkCode: mobileNetworkCode ?? this.mobileNetworkCode,
@@ -355,6 +360,7 @@ class TelephonyInfo {
 
   Map<dynamic, dynamic> toMap() {
     return {
+      'dataActivity': dataActivity,
       'networkCountryIso': networkCountryIso,
       'mobileCountryCode': mobileCountryCode,
       'mobileNetworkCode': mobileNetworkCode,
@@ -373,13 +379,14 @@ class TelephonyInfo {
 
   factory TelephonyInfo.fromMap(Map<dynamic, dynamic> map) {
     return TelephonyInfo(
+      dataActivity: map['dataActivity'] ?? 0,
       networkCountryIso: map['networkCountryIso'] ?? '',
       mobileCountryCode: map['mobileCountryCode'] ?? '',
       mobileNetworkCode: map['mobileNetworkCode'] ?? '',
       displayName: map['displayName'] ?? '',
       simState: map['simState'] ?? '',
       isoCountryCode: map['isoCountryCode'] ?? '',
-      cellId: CellId.fromMap(map['cellId']),
+      cellId: CellId.fromMap(map['cellId'] ?? {}),
       phoneNumber: map['phoneNumber'] ?? '',
       carrierName: map['carrierName'] ?? '',
       subscriptionId: map['subscriptionId'] ?? 0,
@@ -396,7 +403,7 @@ class TelephonyInfo {
 
   @override
   String toString() {
-    return 'TelephonyInfo(networkCountryIso: $networkCountryIso, mobileCountryCode: $mobileCountryCode, mobileNetworkCode: $mobileNetworkCode, displayName: $displayName, simState: $simState, isoCountryCode: $isoCountryCode, cellId: $cellId, phoneNumber: $phoneNumber, carrierName: $carrierName, subscriptionId: $subscriptionId, networkGeneration: $networkGeneration, radioType: $radioType, networkOperatorName: $networkOperatorName)';
+    return 'TelephonyInfo(dataActivity: $dataActivity, networkCountryIso: $networkCountryIso, mobileCountryCode: $mobileCountryCode, mobileNetworkCode: $mobileNetworkCode, displayName: $displayName, simState: $simState, isoCountryCode: $isoCountryCode, cellId: $cellId, phoneNumber: $phoneNumber, carrierName: $carrierName, subscriptionId: $subscriptionId, networkGeneration: $networkGeneration, radioType: $radioType, networkOperatorName: $networkOperatorName)';
   }
 
   @override
