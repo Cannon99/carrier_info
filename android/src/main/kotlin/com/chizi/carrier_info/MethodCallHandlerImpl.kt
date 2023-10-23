@@ -139,8 +139,7 @@ internal class MethodCallHandlerImpl(context: Context, activity: Activity?) : Me
                             subscriptionsList.add(HashMap())
                         }
 
-                        val telephonyManager =
-                            mDefaultTelephonyManager!!.createForSubscriptionId(subsInfo.subscriptionId);
+                        val telephonyManager = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) mDefaultTelephonyManager!!.createForSubscriptionId(subsInfo.subscriptionId) else mDefaultTelephonyManager!!
 
                         try {
                             val data = hashMapOf<String, Any?>(
